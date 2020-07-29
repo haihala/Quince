@@ -1,0 +1,14 @@
+[Unit]
+Description=React flask whiteboard website
+After=network.target
+
+[Service]
+User=quince
+WorkingDirectory=/home/quince/Quince
+Environment=FLASK_CONFIG=production
+Environment=FLASK_APP=app.py
+ExecStart=/usr/bin/python3 -m flask run
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
