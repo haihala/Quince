@@ -247,4 +247,4 @@ dist
 .pnp.*
 
 # Vim files.
-.swp
+*.swp
