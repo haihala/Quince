@@ -1,12 +1,13 @@
 from flask import Flask
 from flask_socketio import SocketIO
 
-app = Flask("Quince", static_folder='front/build', static_url_path='/')
+#app = Flask("Quince", static_folder='front/build', static_url_path='/')
+app = Flask("Quince")
 socketio = SocketIO(app)
 
-@app.route("/")
+@app.route("/flask")
 def index():
-    return app.send_static_file('index.html')
+    return "Hello World"
 
 @socketio.on("event", namespace="/<note>/")
 def process_note(note):
