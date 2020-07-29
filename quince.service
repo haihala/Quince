@@ -6,6 +6,7 @@ After=network.target
 User=quince
 WorkingDirectory=/home/quince/Quince
 Environment=FLASK_CONFIG=production
+Environment=FLASK_ENV=development
 Environment=FLASK_APP=app.py
 ExecStart=/usr/bin/python3 -m flask run
 Restart=always
