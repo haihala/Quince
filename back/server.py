@@ -77,11 +77,18 @@ class Server:
         # Deleting closed notes that haven't been edited in a while.
         # Update catalogue of existing notes
         while self.server.is_serving:
+            deleted = set()
+
             for note, socks in self.notes.items():
                 path = os.path.join(self.datadir, note)
-                if not socks and os.path.getmtime(path) < time.time() + 60:
+                assert os.path.isfile(path), "About to check a note that doesn't exist"
+                if not socks and os.path.getmtime(path) + 60 < time.time():
                     # File has no active sockets and hasn't been modified for a minute
                     await self.lockDelete(note)
+                    deleted.add(note)
+            
+            for note in deleted:
+                del self.notes[note]
             
             for sock, note in self.inverseNotes().items():
                 if sock not in self.server.websockets:

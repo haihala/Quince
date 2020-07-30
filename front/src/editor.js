@@ -6,7 +6,6 @@
         // Stolen from https://dev.to/finallynero/using-websockets-in-react-4fkp
         // instance of websocket connection as a class property
         ws = new WebSocket('ws://localhost:5000/ws')
-        lastEvent = ""
         inputref = React.createRef();
         
         onLinkCopy() {
@@ -22,27 +21,27 @@
             this.ws.onopen = () => {
                 // on connecting, do nothing but log it to the console
                 this.ws.send(JSON.stringify({"type": "fetch", "id": this.props.match.params.editorId}))
-                this.lastEvent = 'connected'
             }
             
             this.ws.onmessage = evt => {
                 // listen to data sent from the websocket server
-                this.lastEvent = JSON.parse(evt.data)
-                if (this.lastEvent.result === "fail") {
+                let eventData = JSON.parse(evt.data)
+                if (eventData.result === "fail") {
                     // Shit's fucked up yo, you did something you shouldn't
                     console.error("Status === fail")
-                    console.error(this.lastEvent)
-                } else if (this.lastEvent.result === "ok") {
-                    console.log(this.lastEvent)
-                    this.inputref.current.value = this.lastEvent.content
+                    console.error(eventData)
+                } else if (eventData.result === "ok") {
+                    console.log(eventData)
+                    if (eventData.content) {
+                        this.inputref.current.value = eventData.content
+                    }
                 } else {
                     console.error("Weird status")
-                    console.error(this.lastEvent)
+                    console.error(eventData)
                 }
             }
             
             this.ws.onclose = () => {
-                this.last_event = 'disconnected'
             }
         }
         
@@ -51,11 +50,11 @@
                 <div>
                     <a href={window.location.href}>Link to this page</a> 
                     <CopyToClipboard text={window.location.href} onCopy={this.onLinkCopy}>
-                        <button> Copy to clipboard </button>
+                        <button>Copy to clipboard</button>
                     </CopyToClipboard>
                     <Link to="/" color="red">Go home</Link>
                 </div>
-                <textarea id="textarea" rows="40" cols="150" ref={this.inputref} onChange={this.updateServer}></textarea>
+                <textarea id="textarea" rows="40" cols="150" ref={this.inputref} onChange={this.updateServer.bind(this)}></textarea>
             </div>;
         }
     }

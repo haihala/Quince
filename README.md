@@ -2,7 +2,7 @@
 
 Collaborative notepad/paint to learn websockets.
 
-⚠️ **If you run quince as root and set a custom data directory be extra careful. Everything in the directory will be visible to the public and could be deleted** ⚠️
+⚠️ **If you run quince as root(don't) and set a custom data directory be extra careful. Everything in the directory will be visible to the public and could be deleted** ⚠️
 
 Python backend, react frontend (made with Node). Contains host file for nginx and systemd unit.
 
