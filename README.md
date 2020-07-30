@@ -8,10 +8,13 @@ Python back, react front (made with Node). Contains host file for nginx.
 
 Backend install:
 1. Install python
-2. To install dependencies, run `python -m pip install -r requirements.txt`
-3. Make systemd service. Usually done with `ln -s /path/to/this/repo/quince.service /etc/systemd/system`
-4. Reload systemd units `systemctl daemon-reload`
-5. Turn on the unit `systemctl start quince`
+2. Wnstall dependencies with `python -m pip install -r requirements.txt`
+3. Update service
+    3.1 Change WorkingDirectory based on where you installed Quince.
+    3.2 Change Environment variables to match the port/host you are planning on running. Values are not necessary and defaults are in the service.
+4. Make systemd service. Usually done with `ln -s /path/to/this/repo/quince.service /etc/systemd/system`
+5. Reload systemd units `systemctl daemon-reload`
+6. Turn on the unit `systemctl start quince`
 
 Frontend install:
 1. Install nginx
