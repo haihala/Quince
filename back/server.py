@@ -76,7 +76,7 @@ class Server:
         # For the background thread. Responsible for:
         # Deleting closed notes that haven't been edited in a while.
         # Update catalogue of existing notes
-        while self.server.is_serving:
+        while self.server.sockets:
             deleted = set()
 
             for note, socks in self.notes.items():
