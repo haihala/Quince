@@ -1,5 +1,5 @@
 [Unit]
-Description=React flask whiteboard website
+Description=React whiteboard website
 After=network.target
 
 [Service]

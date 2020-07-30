@@ -17,9 +17,12 @@ Backend install:
 6. Turn on the unit `systemctl start quince`
 
 Frontend install:
-1. Install nginx
+1. Install nginx and npm
 2. Link `quince.conf` to nginx config location. Usually done with `ln -s /path/to/this/repo/quince.conf /etc/nginx/sites-enabled`
 3. Change `server_name` in `quince.conf`
-4. Reload nginx with `systemctl reload nginx`
+4. Run the following in the `front` directory:
+    4.1 `npm install` will install all the modules
+    4.2 `npm run build` will build the website
+5. Reload nginx with `systemctl reload nginx`
 
 When both front and back are operational, site should respond to whatever `server_name` you gave it.

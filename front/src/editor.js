@@ -10,6 +10,7 @@ class Editor extends Component {
         this.ws.onopen = () => {
         // on connecting, do nothing but log it to the console
         console.log('connected');
+        this.ws.send("Mike");
         }
 
         this.ws.onmessage = evt => {
