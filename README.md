@@ -1,8 +1,10 @@
 # Quince
 
-Virtual TableTop (VTT) combined with a world building tool. Start with a demo collaborative paint as a prove of concept.
+Collaborative notepad/paint to learn websockets.
 
-Python back, react front (made with Node). Contains host file for nginx.
+⚠️ **If you run quince as root and set a custom data directory be extra careful. Everything in the directory will be visible to the public and could be deleted** ⚠️
+
+Python backend, react frontend (made with Node). Contains host file for nginx and systemd unit.
 
 `python` refers to python3.8 or newer. Older python may work but I haven't tested with one.
 
