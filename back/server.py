@@ -100,10 +100,11 @@ class Server:
 
     async def start(self, loop):
         print("Starting server")
-        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-        fullchain_pem = pathlib.Path("/etc/letsencrypt/live/whiteboard.tunk.org/fullchain.pem")
-        privkey_pem = pathlib.Path("/etc/letsencrypt/live/whiteboard.tunk.org/privkey.pem")
-        ssl_context.load_cert_chain(fullchain_pem, keyfile=privkey_pem)
+        ssl_context = ssl.create_default_context()
+        #ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+        #fullchain_pem = pathlib.Path("/etc/letsencrypt/live/whiteboard.tunk.org/fullchain.pem")
+        #privkey_pem = pathlib.Path("/etc/letsencrypt/live/whiteboard.tunk.org/privkey.pem")
+        #ssl_context.load_cert_chain(fullchain_pem, keyfile=privkey_pem)
         self.server = await websockets.serve(self.handler, self.host, self.port, ssl=ssl_context)
         loop.create_task(self.backgroundChugger())
         return self.server
