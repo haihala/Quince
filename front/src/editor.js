@@ -5,8 +5,8 @@
     class Editor extends Component {
         // Stolen from https://dev.to/finallynero/using-websockets-in-react-4fkp
         // instance of websocket connection as a class property
-        //ws = new WebSocket('wss://'+window.location.hostname+'/ws')
-        ws = new WebSocket('ws://localhost:5000/ws')
+        ws = new WebSocket('ws://'+window.location.hostname+':5000/ws')
+        //ws = new WebSocket('ws://localhost:5000/ws')
         inputref = React.createRef();
         
         onLinkCopy() {
