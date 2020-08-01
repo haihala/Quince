@@ -4,6 +4,7 @@ import websockets
 import json
 import pprint
 import time
+import ssl
 import pathlib
 
 class Server:
@@ -99,7 +100,11 @@ class Server:
 
     async def start(self, loop):
         print("Starting server")
-        self.server = await websockets.serve(self.handler, self.host, self.port)
+        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        localhost_pem = pathlib.Path(__file__).with_name("localhost.pem")
+        ssl_context.load_cert_chain(localhost_pem)
+        #localhost_pem = pathlib.Path()
+        self.server = await websockets.serve(self.handler, self.host, self.port, ssl=ssl_context)
         loop.create_task(self.backgroundChugger())
         return self.server
 
