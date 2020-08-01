@@ -10,7 +10,7 @@ class Server:
     def __init__(self):
         self.debug = False
         self.port = os.getenv('QUINCE_PORT', '5000')
-        self.host = os.getenv('QUINCE_HOST', 'localhost')
+        self.host = os.getenv('QUINCE_HOST', '0.0.0.0')
         self.datadir = os.getenv('QUINCE_DATA', 'data')
         if not os.path.isabs(self.datadir):
             self.datadir = os.path.join(os.getcwd(), self.datadir)
