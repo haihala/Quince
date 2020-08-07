@@ -6,7 +6,7 @@ After=network.target
 User=quince
 WorkingDirectory=/home/quince/Quince
 Environment=QUINCE_PORT=5000
-Environment=QUINCE_HOST=localhost
+Environment=QUINCE_HOST=0.0.0.0
 Environment=QUINCE_DATA=data
 ExecStart=/usr/bin/python3 back
 Restart=always
