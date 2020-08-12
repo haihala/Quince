@@ -11,7 +11,7 @@ class Server:
     def __init__(self):
         self.debug = False
         self.port = os.getenv('QUINCE_PORT', '5000')
-        self.host = os.getenv('QUINCE_HOST', '0.0.0.0')
+        self.host = os.getenv('QUINCE_HOST', 'localhost')
         self.datadir = os.getenv('QUINCE_DATA', 'data')
         if not os.path.isabs(self.datadir):
             self.datadir = os.path.join(os.getcwd(), self.datadir)
@@ -99,7 +99,7 @@ class Server:
             await asyncio.sleep(1)
 
     async def start(self, loop):
-        print("Starting server")
+        print("Starting server on {}:{}".format(self.host, self.port))
         ssl_context = ssl.create_default_context()
         #ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
         #fullchain_pem = pathlib.Path("/etc/letsencrypt/live/whiteboard.tunk.org/fullchain.pem")
